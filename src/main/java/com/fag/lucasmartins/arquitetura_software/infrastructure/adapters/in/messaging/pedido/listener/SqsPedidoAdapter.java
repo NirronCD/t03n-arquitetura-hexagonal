@@ -20,13 +20,13 @@ public class SqsPedidoAdapter {;
 
     @SqsListener("${queue.order-events}")
     public void listen(EntradaPedidoDTO dto) {
-        System.out.println("Mensagem recebida: " + dto.toString());
+        System.out.println("Mensagem recebida, pessoa ID: " + dto.getCustomerId());
 
         PedidoBO pedidoBO = pedidoBOMapper.toBo(dto);
 
         pedidoServicePort.criarPedido(pedidoBO);
 
-        System.out.println("Mensagem consumida com sucesso.");
+        System.out.println("Mensagem consumida com sucesso. Pedido cadastrado com sucesso!");
     };
 
 };
